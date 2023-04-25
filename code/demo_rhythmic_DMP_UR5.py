@@ -12,6 +12,8 @@ from UR5SimModel import UR5SimModel
 sys.path.append('./DMP')
 from dmp_rhythmic import dmp_rhythmic
 
+import matplotlib
+matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
 print ('Program started')

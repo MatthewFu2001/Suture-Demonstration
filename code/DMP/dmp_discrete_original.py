@@ -207,7 +207,7 @@ class dmp_discrete():
 
 #%% test code
 if __name__ == "__main__":
-    data_len = 500
+    data_len = 1000
 
     # ----------------- For different initial and goal positions
     t = np.linspace(0, 1.5*np.pi, data_len)

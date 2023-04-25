@@ -28,6 +28,7 @@ class dmp_discrete():
         self.tau = 1.0
         self.delta = np.ones((n_dmps, 1))
         self.delta_2 = np.ones((n_dmps, 1))
+        self.kwargs = kwargs
 
         self.w = np.zeros((n_dmps, n_bfs)) # weights for forcing term
         self.psi_centers = np.zeros(self.n_bfs) # centers over canonical system for Gaussian basis functions
@@ -45,6 +46,12 @@ class dmp_discrete():
 
         # reset state
         self.reset_state()
+    
+    def set_dt(self,dt_):
+        self.dt = dt_
+        self.cs = CanonicalSystem(dt=self.dt, **self.kwargs)
+        self.timesteps = round(self.cs.run_time / self.dt)
+        self.generate_centers()
 
     # Reset the system state
     def reset_state(self):
@@ -237,7 +244,7 @@ class dmp_discrete():
 
 #%% test code
 if __name__ == "__main__":
-    data_len = 500
+    data_len = 1000
 
     # ----------------- For different initial and goal positions
     t = np.linspace(0, 1.5*np.pi, data_len)

@@ -117,7 +117,7 @@ if __name__ == "__main__":
     desired_q = [0, 0, 0, 0, 0, 0]
 
     print("Main loop is begining ...")
-    t_max = 20
+    t_max = 40
     for t in np.linspace(0, t_max, t_max*100):
         q = UR5_sim_model.getAllJointAngles()
         # print(q)

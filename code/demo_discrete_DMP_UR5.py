@@ -13,7 +13,8 @@ from UR5SimModel import UR5SimModel
 
 sys.path.append('./DMP')
 from dmp_discrete import dmp_discrete
-
+import matplotlib
+matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 

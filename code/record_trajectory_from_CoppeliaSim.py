@@ -11,6 +11,8 @@ import sim as vrep_sim
 sys.path.append('./UR5')
 from UR5SimModel import UR5SimModel
 
+import matplotlib
+matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
