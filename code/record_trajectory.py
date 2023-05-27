@@ -106,4 +106,4 @@ data = np.vstack((pos_record_x, pos_record_y, pos_record_z))
 print(data)
 
 df = pd.DataFrame(data)
-df.to_csv('./demo_trajectory/train_trajectory_for_discrete_dmp_straight.csv', index=False, header=None)
+df.to_csv('./demo_trajectory/straight_line_right_left.csv', index=False, header=None)
