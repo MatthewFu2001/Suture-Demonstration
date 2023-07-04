@@ -32,7 +32,7 @@ y_demo[1,:] = demo_traj[1,:]
 
 # DMP learning
 dmp = dmp_discrete(n_dmps=y_demo.shape[0], n_bfs=200, dt=1.0/data_len)
-dmp.learning(y_demo, plot=False)
+dmp.learning(y_demo, plot=True)
 
 # reproduce learned trajectory
 y_reproduce, dy_reproduce, ddy_reproduce = dmp.reproduce()
@@ -52,8 +52,8 @@ plt.plot(y_reproduce_2[:,1], 'm-.', label='reproduce 2 y')
 plt.legend(loc="upper right")
 # plt.ylim(-1.5, 3)
 plt.grid()
-plt.xlabel('time')
-plt.ylabel('y')
+plt.xlabel('time/ms')
+plt.ylabel('y/cm')
 
 plt.subplot(2,1,2)
 plt.plot(y_demo[0,:], y_demo[1,:], 'g', label='demo')
@@ -62,8 +62,8 @@ plt.plot(y_reproduce_2[:,0], y_reproduce_2[:,1], 'r-.', label='reproduce 2')
 plt.legend(loc="upper right")
 # plt.ylim(-1.5, 3)
 plt.grid()
-plt.xlabel('x')
-plt.ylabel('y')
+plt.xlabel('x/cm')
+plt.ylabel('y/cm')
 plt.show()
 
 # %%

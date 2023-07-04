@@ -47,11 +47,11 @@ UR5_sim_model = UR5SimModel()
 UR5_sim_model.initializeSimModel(client_ID)
 
 
-return_code, initial_dummy_handle = vrep_sim.simxGetObjectHandle(client_ID, 'initial', vrep_sim.simx_opmode_blocking)
+return_code, initial_dummy_handle = vrep_sim.simxGetObjectHandle(client_ID, 'via1', vrep_sim.simx_opmode_blocking)
 if (return_code == vrep_sim.simx_return_ok):
     print('get initial dummy handle ok.')
 
-return_code, goal_dummy_handle = vrep_sim.simxGetObjectHandle(client_ID, 'goal', vrep_sim.simx_opmode_blocking)
+return_code, goal_dummy_handle = vrep_sim.simxGetObjectHandle(client_ID, 'via2', vrep_sim.simx_opmode_blocking)
 if (return_code == vrep_sim.simx_return_ok):
     print('get goal dummy handle ok.')
 
@@ -76,9 +76,9 @@ record_enable = False
 while True:
     _, UR5_target_pos = vrep_sim.simxGetObjectPosition(client_ID, UR5_target_dummy_handle, -1, vrep_sim.simx_opmode_oneshot)
 
-    if (record_enable == False) and (np.sqrt((UR5_target_pos[0] - initial_pos[0])**2 + (UR5_target_pos[1] - initial_pos[1])**2 + (UR5_target_pos[2] - initial_pos[2])**2) < 0.005):
+    if (record_enable == False) and (np.sqrt((UR5_target_pos[0] - initial_pos[0])**2 + (UR5_target_pos[1] - initial_pos[1])**2 + (UR5_target_pos[2] - initial_pos[2])**2) < 0.0005):
         record_enable = True
-    if (np.sqrt((UR5_target_pos[0] - goal_pos[0])**2 + (UR5_target_pos[1] - goal_pos[1])**2 + (UR5_target_pos[2] - goal_pos[2])**2) < 0.005):
+    if (np.sqrt((UR5_target_pos[0] - goal_pos[0])**2 + (UR5_target_pos[1] - goal_pos[1])**2 + (UR5_target_pos[2] - goal_pos[2])**2) < 0.0005):
         record_enable = False
         break
 
@@ -98,6 +98,10 @@ print(len(pos_record_x))
 
 fig = plt.figure()
 ax=Axes3D(fig)
+ax.legend()
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+ax.set_zlabel('z')
 plt.plot(pos_record_x, pos_record_y, pos_record_z)
 plt.show()
 
@@ -106,4 +110,4 @@ data = np.vstack((pos_record_x, pos_record_y, pos_record_z))
 print(data)
 
 df = pd.DataFrame(data)
-df.to_csv('./demo_trajectory/straight_line_right_left.csv', index=False, header=None)
+df.to_csv('./demo_trajectory/skill_sew_2.csv', index=False, header=None)

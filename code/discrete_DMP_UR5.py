@@ -68,14 +68,14 @@ time.sleep(0.1)
 
 #%% DMP learning
 # get demonstrated trajectory from file
-df = pd.read_csv('./demo_trajectory/train_trajectory_for_discrete_dmp_lc_20.csv', header=None)
+df = pd.read_csv('./new_sences/straight_line_csv/train_dmp_straight_line_9.csv', header=None)
 reference_trajectory = np.array(df)
 data_dim = reference_trajectory.shape[0]
 data_len = reference_trajectory.shape[1]
 
-# dmp = dmp_discrete(n_dmps=data_dim, n_bfs=1000, dt=1.0/data_len)
-dmp = joblib.load('./model/dmp_17.dat')
-dmp.set_dt(1.0/data_len)
+dmp = dmp_discrete(n_dmps=data_dim, n_bfs=1000, dt=1.0/data_len)
+# dmp = joblib.load('./model/dmp_17.dat')
+# dmp.set_dt(1.0/data_len)
 dmp.learning(reference_trajectory)
 
 reproduced_trajectory, _, _ = dmp.reproduce()

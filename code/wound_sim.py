@@ -13,25 +13,34 @@ import sympy as sp
 
 # 生成伤口曲线的参数方程
 def wound_curve(ti):
-    # x = np.cos(ti) + np.cos(2*ti)
-    # y = np.sin(ti) + 0.8*np.sin(4*ti)
+    # x = np.cos(ti) + 0.6*np.cos(2*ti)
+    # y = np.sin(ti) + 0.5*np.sin(2*ti)
     # z = 0.0*ti
-    # z = -0.8*np.sin(4*ti)
-    x = ti
-    y = ti**2
-    z = ti**3
+    # z = -0.1*np.sin(4*ti)
+    # x = ti
+    # y = ti**2
+    # z = ti**3
+    mean = np.random.uniform(-2,2)
+    std = np.random.uniform(0.5,1.5)
+    amp = np.random.uniform(0.5,1.5)
+    coeffs = np.random.uniform(-1,1,size=4)
+    x = amp * np.exp(-((ti-mean)**2/(2*std**2)))
+    y = np.sin(ti) + 0.5*np.sin(2*ti)
+    z = -0.1*np.sin(4*ti)
+    return x, y, z, mean, std, amp
 
-    return x, y, z
-
-def curve_normal(ti):
+def curve_normal(ti,mean,std,amp):
     x,y,z,t = sp.symbols('x y z t')
-    # x = sp.cos(t) + sp.cos(2*ti)
-    # y = sp.sin(t) + 0.8*sp.sin(4*t)
-    # z = -0.8*sp.sin(4*t)
-    x = t
-    y = t**2
-    z = t**3
+    # x = sp.cos(t)+0.6*sp.cos(2*ti)
+    # y = sp.sin(t) + 0.5*sp.sin(2*t)
+    # z = -0.1*sp.sin(4*t)
     # z = 0.0
+    # x = t
+    # y = t**2
+    # z = t**3
+    x = amp * sp.exp(-((ti-mean)**2/(2*std**2)))
+    y = sp.sin(ti) + 0.5*sp.sin(2*ti)
+    z = -0.1*sp.sin(4*ti)
     x_t = sp.diff(x,t)
     y_t = sp.diff(y,t)
     z_t = sp.diff(z,t)
@@ -123,9 +132,9 @@ for i in range(num_points-1):
 fig = plt.figure()
 ax = fig.add_subplot(projection='3d')
 ax.legend()
-ax.set_xlabel('x/cm')
-ax.set_ylabel('y/cm')
-ax.set_zlabel('z/cm')
+ax.set_xlabel('x/dm')
+ax.set_ylabel('y/dm')
+ax.set_zlabel('z/dm')
 x, y, z = wound_curve(t_values)
 ax.plot(x, y, z, label='curve')
 for i in range(num_points-1):

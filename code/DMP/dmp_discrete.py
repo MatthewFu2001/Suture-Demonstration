@@ -162,6 +162,8 @@ class dmp_discrete():
             plt.subplot(211)
             psi_track = self.generate_psi(self.cs.run())
             plt.plot(psi_track)
+            plt.xlabel('time/ms')
+            plt.ylabel('y')
             plt.title('basis functions')
 
             # plot the desired forcing function vs approx
@@ -170,6 +172,8 @@ class dmp_discrete():
             plt.plot(np.sum(psi_track * self.w[0], axis=1) * self.dt)
             plt.legend(['f_target', 'w*psi'])
             plt.title('DMP forcing function')
+            plt.xlabel('time/ms')
+            plt.ylabel('y')
             plt.tight_layout()
             plt.show()
 
